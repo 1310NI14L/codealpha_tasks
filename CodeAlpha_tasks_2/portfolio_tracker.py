@@ -23,7 +23,7 @@ while stop_input:
         break
 
     if names not in stock_prices:
-        print(f"Warning : '{names}' is not listed in our stock prices. Please enter a valid stock.")
+        print(f"Warning : '{names}' is not listed in our stock prices. Please enter a valid stock.\n")
         continue
 
     quantity = int(input(f"Enter the quantity for {names} : "))
