@@ -1,6 +1,6 @@
 Action Name;Quantity Action;Unit Price ($);Total Values ($)
-AAPL;135;180;24300
-MSFT;41;420;17220
-NVDA;6;120;720
+MSFT;7;420;2940
+AAPL;23;180;4140
+AMZN;7;350;2450
 
-Total Investment;;;42240 $
+Total Investment ($);;;9530

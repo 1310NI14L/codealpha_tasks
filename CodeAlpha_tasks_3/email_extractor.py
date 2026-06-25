@@ -1,4 +1,3 @@
-import os
 import re
 
 print("         ___ Task Automation with Python Scripts ___")

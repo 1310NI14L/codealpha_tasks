@@ -3,7 +3,7 @@ import  csv
 print("         ___Stock Portfolio Tracker___")
 print("\n The Goat is of  Build a simple stock tracker that calculates total investment based on manually defined stock prices.\n")
 
-#Dictionnaire codé en dur pour faire références aux données
+#Dictionnaire codé en dur pour faire références aux donnéesampp
 stock_prices = {
     "AAPL": 180,
     "TSLA": 250,
@@ -35,9 +35,17 @@ while stop_input:
         print(f"Warning : '{names}' is not listed in our stock prices. Please enter a valid stock.\n")
         continue
 
-    #Saisie de la quantité (convertie en entier)
-    quantity = int(input(f"Enter the quantity for {names} : "))
-    print("")
+    values = True
+    while values:
+        try:
+            quantity = int(input(f"Enter the quantity for {names} : "))
+
+            # Si la conversion en entier réussit, on valide et on sort de la boucle
+            break
+
+        except ValueError:
+            # Si l'utilisateur a tapé des lettres, Python vient ici au lieu de planter
+            print("Warning: Please enter a valid whole number (integer).")
 
     # Enregistrement dans le portefeuille
     if names in portfolio:
