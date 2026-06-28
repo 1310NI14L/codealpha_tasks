@@ -7,40 +7,28 @@
 
 ##  Description du Projet
 Développement d'un script d'automatisation séquentiel et linéaire (sans aucune fonction `def`) pour isoler et 
-extraire toutes les adresses e-mail valides d'un texte brut. Le programme lit le fichier source, filtre les 
-données et génère automatiquement un rapport propre.
+extraire toutes les adresses e-mail valides d'un texte brut. Le programme propose une interface interactive permettant à l'utilisateur d'analyser le fichier de son choix, tout en intégrant une sécurité de repli automatique sur un fichier par défaut en cas de chemin introuvable.
 
 ---
 
 ##  Concepts Clés Appliqués
+* **Gestion du Système de Fichiers :** Utilisation du module `os` pour vérifier dynamiquement la présence des fichiers sur le disque avant traitement.
 * **Scripts I/O :** Automatisation de la lecture et de l'écriture de fichiers textes avec `with open()`.
 * **Expressions Régulières (Regex) :** Utilisation du module `re` pour scanner et valider les motifs textuels.
 
 ---
 
 ##  Architecture & Flux Logique
-1. **Initialisation :** Importation des modules (`os`, `re`) et définition des chemins de fichiers.
-2. **Lecture Source :** Chargement du fichier `input_textEmail.txt` en mémoire.
-3. **Filtrage (Regex) :** Extraction des e-mails conformes et rejet des formats invalides via `re.findall()`.
-4. **Export :** Écriture séquentielle des résultats dans le fichier cible `extracted_emails.txt`.
+1. **Initialisation :** Importation des modules (`os`, `re`) et configuration du fichier de secours par défaut.
+2. **Saisie Interactive & Flexibilité :** Invitation de l'utilisateur à entrer un chemin de fichier. 
+   * *Si le fichier existe :* Le script l'analyse directement.
+   * *Si le fichier est introuvable :* Le script lève une alerte et bascule de manière transparente sur le fichier par défaut (`fileTXT/input_textEmail.txt`).
+3. **Lecture Source :** Chargement en mémoire du contenu du fichier validé.
+4. **Filtrage (Regex) :** Extraction des e-mails conformes et rejet des formats invalides via `re.findall()`.
+5. **Export :** Écriture séquentielle des résultats et affichage en temps réel dans la console, puis génération du rapport cible `extracted_emails.txt`.
 
 ---
 
 ##  Analyse de la Formule de Détection (Regex)
 ```python
 email_pattern = r"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
-
-[a-zA-Z0-9._%+-]+ : Identifiant utilisateur (lettres, chiffres et symboles autorisés).
-
-@ : Symbole arobase obligatoire.
-
-[a-zA-Z0-9.-]+ : Nom de domaine (lettres, chiffres, tirets et points).
-
-\. : Point physique obligatoire avant l'extension.
-
-[a-zA-Z]{2,} : Extension finale (uniquement des lettres, minimum 2 caractères).
-
-❌ Exemple de rejet : okanlahon01>@store.bj
-Le caractère > n'étant pas autorisé dans l'identifiant utilisateur, la Regex stoppe immédiatement son analyse. 
-L'adresse étant malformée, elle est ignorée de manière transparente.
-
